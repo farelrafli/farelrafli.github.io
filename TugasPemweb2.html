@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Smart Farming — Refined</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg: #f4f7fb;
+      --card-radius: 12px;
+      --accent-width: 10px;
+      --card-padding: 20px;
+      --grid-width: 1200px; /* ubah ini untuk menggeser layout lebih kanan/kiri */
+    }
+
+    html,body{ height:100%; }
+    body{ background:var(--bg); font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, Arial; margin:0; color:#203047; }
+
+    .page-wrap{ padding:36px 40px; }
+    h1.page-title{ font-weight:700; color:#233244; margin-bottom:28px; font-size:42px; }
+
+    /* wrapper untuk mengatur alignment: justify-content:flex-start membuat grid "rata ke kiri" */
+    .cards-row { display:flex; justify-content:flex-start; }
+    .cards-grid{ width:var(--grid-width); display:grid; grid-template-columns: repeat(5, 1fr); gap:22px; }
+
+    .sensor-card{ background:#fff; border-radius:var(--card-radius); padding:var(--card-padding); box-shadow: 0 8px 26px rgba(18,38,63,0.06); position:relative; overflow:visible; min-height:110px; display:flex; flex-direction:column; justify-content:center; }
+    .sensor-card::before{ content:''; position:absolute; left:16px; top:18px; bottom:18px; width:var(--accent-width); border-radius:8px; }
+    .accent-blue::before{ background: linear-gradient(180deg,#3b82f6,#60a5fa); }
+    .accent-green::before{ background: linear-gradient(180deg,#10b981,#34d399); }
+    .accent-teal::before{ background: linear-gradient(180deg,#06b6d4,#34dce3); }
+    .accent-yellow::before{ background: linear-gradient(180deg,#f59e0b,#fbbf24); }
+    .accent-red::before{ background: linear-gradient(180deg,#ef4444,#fb7185); }
+
+    .sensor-title{ font-size:0.8rem; text-transform:uppercase; color:#4b5563; letter-spacing:.6px; margin-left:14px; }
+    .sensor-top{ display:flex; align-items:center; gap:12px; }
+    .sensor-value{ font-size:1.8rem; font-weight:800; margin-top:6px; color:#0f2b43; margin-left:14px; }
+    .sensor-unit{ font-size:1rem; color:#334155; margin-left:8px; font-weight:700; }
+    .sensor-sub{ font-size:0.85rem; color:#6b7280; margin-top:10px; margin-left:14px; }
+
+    .progress-mini{ height:10px; background: #eef2ff; border-radius:999px; overflow:hidden; }
+    .progress-mini > .bar{ height:100%; border-radius:999px; }
+
+    /* small-screen responsive: ubah grid kolom */
+    @media (max-width:1199px){ .cards-grid{ grid-template-columns: repeat(4, 1fr); width:100%; } .cards-row{ justify-content:center; } }
+    @media (max-width:991px){ .cards-grid{ grid-template-columns: repeat(2, 1fr); } h1.page-title{ font-size:34px; } }
+    @media (max-width:575px){ .cards-grid{ grid-template-columns: 1fr; } .page-wrap{ padding:18px; } }
+
+    /* konsistensi tampilan nilai agar terlihat serasi */
+    .sensor-value span.unit-sm{ font-weight:600; font-size:0.9rem; margin-left:8px; color:#334155; }
+  </style>
+</head>
+<body>
+
+<div class="page-wrap container-fluid">
+  <h1 class="page-title">Smart Farming</h1>
+
+  <!-- cards-row membuat grid berada di sebelah kanan (atau tengah di layar kecil) -->
+  <div class="cards-row">
+    <div class="cards-grid">
+
+      <!-- 1 -->
+      <div class="sensor-card accent-blue">
+        <div class="sensor-top">
+          <div class="sensor-title">Kelembaban (RH)</div>
+        </div>
+        <div class="sensor-value">54 <span class="unit-sm">%</span></div>
+      </div>
+
+      <!-- 2 -->
+      <div class="sensor-card accent-green">
+        <div class="sensor-title">TDS</div>
+        <div class="sensor-value">400 <span class="unit-sm">ppm</span></div>
+      </div>
+
+      <!-- 3 -->
+      <div class="sensor-card accent-teal">
+        <div class="sensor-title">Kekeruhan (Turbid)</div>
+        <div class="sensor-value">18 <span class="unit-sm">NTU</span></div>
+        <div class="sensor-sub">
+          <div class="progress-mini" aria-hidden="true">
+            <div class="bar" style="width:40%; background:linear-gradient(90deg,#06b6d4,#06b6d4)"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4 -->
+      <div class="sensor-card accent-yellow">
+        <div class="sensor-title">Temperatur Air (WTemp)</div>
+        <div class="sensor-value">25 <span class="unit-sm">C</span></div>
+      </div>
+
+      <!-- 5 -->
+      <div class="sensor-card accent-red">
+        <div class="sensor-title">Aliran Air (WFlow)</div>
+        <div class="sensor-value">34</div>
+      </div>
+
+      <!-- 6 -->
+      <div class="sensor-card accent-blue">
+        <div class="sensor-title">Oksigen Terlarut (Diss.Oxygen)</div>
+        <div class="sensor-value">10 <span class="unit-sm">ppm</span></div>
+      </div>
+
+      <!-- 7 -->
+      <div class="sensor-card accent-green">
+        <div class="sensor-title">Intensitas Cahaya (Lux)</div>
+        <div class="sensor-value">100 <span class="unit-sm">Lux</span></div>
+      </div>
+
+      <!-- 8 -->
+      <div class="sensor-card accent-teal">
+        <div class="sensor-title">Temperatur Udara (AmTemp)</div>
+        <div class="sensor-value">34 <span class="unit-sm">C</span></div>
+        <div class="sensor-sub">
+          <div class="progress-mini" aria-hidden="true">
+            <div class="bar" style="width:65%; background:linear-gradient(90deg,#3b82f6,#60a5fa)"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 9 -->
+      <div class="sensor-card accent-yellow">
+        <div class="sensor-title">EC</div>
+        <div class="sensor-value">2</div>
+      </div>
+
+      <!-- 10 -->
+      <div class="sensor-card accent-red">
+        <div class="sensor-title">pH</div>
+        <div class="sensor-value">7.1</div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  // pencatatan: jika ingin menggeser grid lebih ke kanan, ubah --grid-width di :root ke nilai yang lebih kecil atau lebih besar.
+  // contoh live update: fetch('/api/sensors') lalu update teks dalam .sensor-value
+</script>
+</body>
+</html>
